@@ -1,0 +1,8 @@
+openai
+streamlit
+matplotlib
+spacy
+'unstructured[pdf]'
+deep_translator
+sentence-transformers
+plotly
