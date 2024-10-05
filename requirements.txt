@@ -6,4 +6,4 @@ unstructured[pdf]
 deep_translator
 sentence-transformers
 plotly
-opencv-python
+opencv-python-headless
