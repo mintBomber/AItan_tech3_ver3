@@ -22,9 +22,5 @@ def load_csv(file_name):
 
 def load_api_key():
     """api_keyの取得"""
-    with open('config.json', 'r') as file:
-        config = json.load(file)
-
-    api_key = config.get('api_key')
-
+    api_key = st.secrets["ApiKey"]["OPENAI_API_KEY"]
     return api_key
