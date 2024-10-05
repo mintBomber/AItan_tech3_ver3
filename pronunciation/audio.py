@@ -3,7 +3,7 @@ from google.cloud import texttospeech
 
 
 # Google Cloud Text-to-Speechの認証情報設定 (事前に設定済みであること)
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'secret-key.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = st.secrets["ApiKey"]["GoogleCloudTTS"]
 text_to_speech_client = texttospeech.TextToSpeechClient()
 
 def main(word):
