@@ -7,6 +7,9 @@ from deep_translator import GoogleTranslator
 from openai import OpenAI   # OpenAI APIを使用するためのライブラリ
 from utils import load_api_key
 
+import spacy.cli
+spacy.cli.download("en_core_web_sm")
+
 # SpaCyのモデルをロード（英語モデル）
 nlp = spacy.load('en_core_web_sm')
 
