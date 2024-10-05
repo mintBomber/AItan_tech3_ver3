@@ -2,7 +2,7 @@ openai
 streamlit
 matplotlib
 spacy
-'unstructured[pdf]'
+unstructured[pdf]
 deep_translator
 sentence-transformers
 plotly
