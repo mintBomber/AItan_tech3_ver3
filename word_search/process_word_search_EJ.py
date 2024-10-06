@@ -112,4 +112,31 @@ def main(word, category, df):
         df.to_csv(csv_file, index=False)
     df = pd.read_csv(csv_file)
 
-    return search_word(word, category, df)
+    # スペルチェック
+    api_key = load_api_key()
+    client = OpenAI(api_key=api_key)
+
+    spell_check_prompt = f"""
+        あなたは英語のスペルチェッカーです。以下の単語のスペルを確認してください。
+        単語: {word}
+        この単語がスペルミスの場合、"正しいスペル: [正しい単語]" として正しいスペルを提案してください。
+        正しいスペルがある場合、その単語を返してください。
+        スペルミスがない場合は "正しいスペル: {word}" としてそのまま返してください。
+        """
+
+    spell_response = client.chat.completions.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "user", "content": spell_check_prompt}
+        ],
+        max_tokens=100,
+        temperature=0.5,
+    )
+
+    spell_check_output = spell_response.choices[0].message.content  
+
+    if "正しいスペル" in spell_check_output:
+        correct_spelling = spell_check_output.split("正しいスペル: ")[1].strip()
+        word = correct_spelling  # word を正しいスペルに上書き
+
+    return search_word(word, category, df)  # 修正した単語を渡す
