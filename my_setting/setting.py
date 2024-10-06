@@ -15,7 +15,7 @@ if os.path.exists(setting_csv_path):
     else:
         settings = {"FinalLogin": None, "Character": None, "Goal": None, "ContinueDays": None, 
                     "Gender": None, "Age": None, "HabitualSaying": None, "UserProfile": None, 
-                    "UserInterest": None, "ColorPattern": None}
+                    "UserInterest": None, "ColorPattern": None, "UserName": "あなた"}  # UserName を追加
 
     # 列が存在しない場合は追加
     if "FinalLogin" not in df.columns:
@@ -38,6 +38,8 @@ if os.path.exists(setting_csv_path):
         df["UserInterest"] = None
     if "ColorPattern" not in df.columns:
         df["ColorPattern"] = None
+    if "UserName" not in df.columns:  # UserName列が存在しない場合に追加
+        df["UserName"] = "あなた"  # デフォルトで「あなた」と記入
 
     # settings を更新
     settings = df.iloc[0].to_dict()
@@ -47,7 +49,8 @@ if os.path.exists(setting_csv_path):
 else:
     settings = {"FinalLogin": None, "Character": None, "Goal": None, "ContinueDays": None, 
                 "Gender": None, "Age": None, "HabitualSaying": None, "UserProfile": None, 
-                "UserInterest": None, "ColorPattern": None}
+                "UserInterest": None, "ColorPattern": None, "UserName": "あなた"}  # UserName を追加
+
 # 学習目標
 st.markdown("<hr style='border:3px solid gray'>", unsafe_allow_html=True)
 
@@ -67,7 +70,6 @@ with col2:
     if st.button("更新"):
         if goal:
             settings["Goal"] = goal  # Goalの値を更新
-            # setting.csvファイルに設定を保存する
             # setting.csvファイルに設定を保存する
             df = pd.DataFrame([settings])
             df.to_csv(setting_csv_path, index=False)  # パスを変更
@@ -122,6 +124,10 @@ if st.button("キャラクター設定を更新する", key="update_character"):
 st.markdown("<hr style='border:3px solid gray'>", unsafe_allow_html=True)
 st.subheader("ユーザー情報の設定")
 
+# ユーザーネーム入力欄を追加
+user_name = st.text_input("ユーザーネーム", value=settings["UserName"] if settings["UserName"] else "あなた")  # UserName を追加
+st.markdown("---")
+
 # 自己紹介欄
 user_profile = st.text_area("自己紹介：できるだけ詳細に記入してください", value=settings["UserProfile"] if settings["UserProfile"] else "", height=100)
 st.markdown("---")
@@ -130,6 +136,7 @@ user_interest = st.text_input("興味のある分野", value=settings["UserInter
 
 # 更新ボタン
 if st.button("ユーザー情報を更新する", key="update_user_info"):
+    settings["UserName"] = user_name  # UserName を settings に保存
     # 改行文字を削除してから保存
     settings["UserProfile"] = user_profile.replace("\n", "")
     settings["UserInterest"] = user_interest
