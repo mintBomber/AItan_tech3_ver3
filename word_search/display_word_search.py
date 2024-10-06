@@ -5,7 +5,7 @@ import streamlit as st
 from word_search.process_word_search_EJ import main as main_EJ
 from word_search.process_word_search_JE import main as main_JE
 from utils import load_csv
-from word_search.audio import main as audio_main  # word_search.audio を使用
+# from word_search.audio import main as audio_main  # word_search.audio を使用
 
 
 def main():
