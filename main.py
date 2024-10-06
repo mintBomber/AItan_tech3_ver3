@@ -19,6 +19,8 @@ def main():
             st.image("images/icon.png", width=400)
             #st.markdown(f'<img src="images/nabe_popping.gif" width="300">', unsafe_allow_html=True)
 
+        col1, col2, col3= st.columns([1,1,1]) # 中央寄せのためにカラムを追加
+        with col2: # 中央のカラムに
             # setting.csvファイルのパスを指定
             setting_csv_path = "database/setting.csv"
                 
