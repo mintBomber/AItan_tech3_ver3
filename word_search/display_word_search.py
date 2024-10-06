@@ -4,9 +4,12 @@ import streamlit as st
 
 from word_search.process_word_search_EJ import main as main_EJ
 from word_search.process_word_search_JE import main as main_JE
-from utils import load_csv
 # from word_search.audio import main as audio_main  # word_search.audio を使用
 
+from utils import load_csv, load_api_key
+from openai import OpenAI
+api_key = load_api_key()
+client = OpenAI(api_key=api_key)
 
 def main():
 
