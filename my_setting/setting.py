@@ -5,8 +5,63 @@ from openai import OpenAI
 
 from utils import load_api_key
 api_key = load_api_key()
-
 client = OpenAI(api_key=api_key)
+
+def generate_character_comments(settings):
+    """
+    OpenAI APIを利用してキャラクターの台詞を生成し、CharacterComments.csvに保存する関数
+
+    Args:
+        settings (dict): 設定情報
+    """
+
+    # キャラクターの台詞を生成
+    character_comments = {
+        "LessThan3": [],
+        "3more": [],
+        "7more": [],
+        "14more": []
+    }
+    for days, key in [(3, "LessThan3"), (3, "3more"), (7, "7more"), (14, "14more")]:
+        for i in range(3):  # 3パターンずつ生成
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",  # または "gpt-4"
+                messages=[
+                    {"role": "system", "content": f"""あなたは、{settings["Gender"]}で{settings["Age"]}歳の{settings["Character"]}です。
+                    口癖は「{settings["HabitualSaying"]}」です。
+                    アプリのユーザーの名前は{settings["UserName"]}です。
+                    ユーザーについて、以下の情報があります。
+                    プロフィール：{settings["UserProfile"]}
+                    興味のある分野：{settings["UserInterest"]}
+
+                    {settings["UserName"]}に話しかける台詞を3パターン生成してください。
+                    {days}日{'' if key == 'LessThan3' else '以上'}連続でログインしたことを想定してください。
+                    """},
+                ],
+                temperature=0.7,  # 温度パラメータでランダム性を調整
+            )
+            character_comments[key].append(response['choices'][0]['message']['content'])
+
+    # CharacterComments.csvファイルのパスを指定
+    character_comments_path = "database/CharacterComments.csv"
+
+    # CharacterComments.csvファイルに設定を保存する
+    if os.path.exists(character_comments_path):
+        df_comments = pd.read_csv(character_comments_path)
+    else:
+        df_comments = pd.DataFrame(columns=["LessThan3", "3more", "7more", "14more"])
+    
+    # 新しい台詞で更新
+    for key in character_comments:
+        df_comments[key] = character_comments[key]
+    df_comments.to_csv(character_comments_path, index=False)
+
+    # 生成した台詞を表示
+    st.subheader("生成されたキャラクターの台詞")
+    for key in character_comments:
+        st.write(f"{key}:")
+        for comment in character_comments[key]:
+            st.write(comment)
 
 st.title("設定")
 
@@ -174,59 +229,4 @@ if st.button("設定する", key="update_color_pattern"):
     df = pd.DataFrame([settings])
     df.to_csv(setting_csv_path, index=False)  # パスを変更
     st.success("テーマカラーを追加しました！", icon="✅")
-
-def generate_character_comments(settings):
-    """
-    OpenAI APIを利用してキャラクターの台詞を生成し、CharacterComments.csvに保存する関数
-
-    Args:
-        settings (dict): 設定情報
-    """
-
-    # キャラクターの台詞を生成
-    character_comments = {
-        "LessThan3": [],
-        "3more": [],
-        "7more": [],
-        "14more": []
-    }
-    for days, key in [(3, "LessThan3"), (3, "3more"), (7, "7more"), (14, "14more")]:
-        for i in range(3):  # 3パターンずつ生成
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",  # または "gpt-4"
-                messages=[
-                    {"role": "system", "content": f"""あなたは、{settings["Gender"]}で{settings["Age"]}歳の{settings["Character"]}です。
-                    口癖は「{settings["HabitualSaying"]}」です。
-                    アプリのユーザーの名前は{settings["UserName"]}です。
-                    ユーザーについて、以下の情報があります。
-                    プロフィール：{settings["UserProfile"]}
-                    興味のある分野：{settings["UserInterest"]}
-
-                    {settings["UserName"]}に話しかける台詞を3パターン生成してください。
-                    {days}日{'' if key == 'LessThan3' else '以上'}連続でログインしたことを想定してください。
-                    """},
-                ],
-                temperature=0.7,  # 温度パラメータでランダム性を調整
-            )
-            character_comments[key].append(response['choices'][0]['message']['content'])
-
-    # CharacterComments.csvファイルのパスを指定
-    character_comments_path = "database/CharacterComments.csv"
-
-    # CharacterComments.csvファイルに設定を保存する
-    if os.path.exists(character_comments_path):
-        df_comments = pd.read_csv(character_comments_path)
-    else:
-        df_comments = pd.DataFrame(columns=["LessThan3", "3more", "7more", "14more"])
     
-    # 新しい台詞で更新
-    for key in character_comments:
-        df_comments[key] = character_comments[key]
-    df_comments.to_csv(character_comments_path, index=False)
-
-    # 生成した台詞を表示
-    st.subheader("生成されたキャラクターの台詞")
-    for key in character_comments:
-        st.write(f"{key}:")
-        for comment in character_comments[key]:
-            st.write(comment)
