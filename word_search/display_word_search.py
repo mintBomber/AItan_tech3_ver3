@@ -20,8 +20,16 @@ def main():
     search_button = st.button("検索", key="search_button")
 
     if search_button and word:
+        # 入力チェック
+        if mode == '和英もーど' and any(c.isalpha() for c in word):
+            st.warning("日本語を入力して下さい")
+            return
+        if mode == '英和もーど' and any(c.isascii() == False for c in word):  # 日本語が含まれているかチェック
+            st.warning("英語を入力して下さい")
+            return
+
         if mode == '和英もーど':
-            result = main_JE(word, category, df)      
+            result = main_JE(word, category, df)     
         else:
             result = main_EJ(word, category, df) 
         
