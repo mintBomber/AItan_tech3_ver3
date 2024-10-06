@@ -30,8 +30,12 @@ def generate_audio(word2):
             os.makedirs("audio")
 
         # 音声ファイルを保存
-        with open(f"audio/{word2}.wav", "wb") as f:  # ここを word2 に修正
+        with open(f"audio/{word2}.wav", "wb") as f:
             f.write(response.content)
+    
+        # ファイルが生成されるまで待機
+        while not os.path.exists(f"audio/{word2}.wav"):
+            time.sleep(0.1)
 
     except Exception as e:
         st.error(f"音声の生成に失敗しました: {e}")
@@ -81,9 +85,9 @@ def main():
                     with open(f"audio/{result['word']}.wav", "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    st.warning(f"音声ファイルが見つかりませんでした: audio/{result['word']}.wav")
+                    # st.warning(f"音声ファイルが見つかりませんでした: audio/{result['word']}.wav")
                 except Exception as e:
-                    st.error(f"音声の再生に失敗しました: {e}")
+                    # st.error(f"音声の再生に失敗しました: {e}")
             
             st.info(f"Example Sentence:　{result['example_sentence']}")
             st.info(f"Translated Sentence:　{result['translated_sentence']}")
