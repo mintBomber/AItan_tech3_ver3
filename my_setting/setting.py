@@ -53,8 +53,10 @@ def generate_character_comments(settings):
     
     # 新しい台詞で更新
     for key in character_comments:
-        df_comments[key] = character_comments[key]
+        df_comments[key] = df_comments[key].tolist()  # Seriesをリストに変換
+        df_comments[key].extend(character_comments[key])  # extendメソッドでリストに追加
     df_comments.to_csv(character_comments_path, index=False)
+
 
     # 生成した台詞を表示
     st.subheader("生成されたキャラクターの台詞")
