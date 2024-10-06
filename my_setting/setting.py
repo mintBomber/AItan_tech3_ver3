@@ -5,6 +5,7 @@ from openai import OpenAI
 
 from utils import load_api_key
 api_key = load_api_key()
+
 client = OpenAI(api_key=api_key)
 
 st.title("設定")
