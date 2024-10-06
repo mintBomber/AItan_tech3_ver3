@@ -19,28 +19,28 @@ def main():
             st.image("images/icon.png", width=400)
             #st.markdown(f'<img src="images/nabe_popping.gif" width="300">', unsafe_allow_html=True)
 
-        # setting.csvファイルのパスを指定
-        setting_csv_path = "database/setting.csv"
-            
-        # setting.csvファイルから設定を読み込む
-        if os.path.exists(setting_csv_path):
-            df = pd.read_csv(setting_csv_path)
-            if not df.empty:
-                continue_days = df.at[0, 'ContinueDays']
-                user_name = df.at[0, 'UserName']
-    
-                # メッセージを生成
-                if continue_days < 4:
-                    message = f"おかえりなさい、{user_name}"
-                elif continue_days < 7:
-                    message = f"最近頑張ってるね、{user_name}"
-                elif continue_days < 14:
-                    message = f"{user_name}、継続は力なりだね"
-                else:
-                    message = f"ログイン{continue_days}日目だね、すごいよ{user_name}！"
-    
-                # メッセージを表示
-                st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+            # setting.csvファイルのパスを指定
+            setting_csv_path = "database/setting.csv"
+                
+            # setting.csvファイルから設定を読み込む
+            if os.path.exists(setting_csv_path):
+                df = pd.read_csv(setting_csv_path)
+                if not df.empty:
+                    continue_days = df.at[0, 'ContinueDays']
+                    user_name = df.at[0, 'UserName']
+        
+                    # メッセージを生成
+                    if continue_days < 4:
+                        message = f"おかえりなさい、{user_name}"
+                    elif continue_days < 7:
+                        message = f"最近頑張ってるね、{user_name}"
+                    elif continue_days < 14:
+                        message = f"{user_name}、継続は力なりだね"
+                    else:
+                        message = f"ログイン{continue_days}日目だね、すごいよ{user_name}！"
+        
+                    # メッセージを表示
+                    st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
                 
         # ページを読み込んだ瞬間にword_db.csvを更新
         update_word_db("database/word_db.csv")
