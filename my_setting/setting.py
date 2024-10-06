@@ -191,7 +191,7 @@ def generate_character_comments(settings):
     }
     for days, key in [(3, "LessThan3"), (3, "3more"), (7, "7more"), (14, "14more")]:
         for i in range(3):  # 3パターンずつ生成
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-3.5-turbo",  # または "gpt-4"
                 messages=[
                     {"role": "system", "content": f"""あなたは、{settings["Gender"]}で{settings["Age"]}歳の{settings["Character"]}です。
