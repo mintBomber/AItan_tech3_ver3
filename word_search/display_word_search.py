@@ -26,7 +26,7 @@ def main():
             result = main_EJ(word, category, df) 
         
         # audio.pyを呼び出して音声を生成
-        audio_main(word)  # ここでaudio.pyのmain関数を呼び出す
+        # audio_main(word)  # ここでaudio.pyのmain関数を呼び出す
         # print(result)
 
         if "error" in result:
