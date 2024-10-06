@@ -2,6 +2,7 @@ import time
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import os
 
 
 def main():
@@ -18,8 +19,8 @@ def main():
             st.image("images/icon.png", width=400)
             #st.markdown(f'<img src="images/nabe_popping.gif" width="300">', unsafe_allow_html=True)
 
-            # setting.csvファイルのパスを指定
-            setting_csv_path = "database/setting.csv"
+        # setting.csvファイルのパスを指定
+        setting_csv_path = "database/setting.csv"
             
         # setting.csvファイルから設定を読み込む
         if os.path.exists(setting_csv_path):
