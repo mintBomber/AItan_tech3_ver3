@@ -81,10 +81,9 @@ def main():
             
             # 発音記号と再生ボタンを横に並べる
             if mode == '英和もーど' :
-                name = {result['word']}
                 try:
                     # 音声ファイル名を "{result['word']}_pronounce.wav" に変更
-                    file_name2 = f"audio/{name}_pronounce.wav"
+                    file_name2 = f"audio/{result['word']}_pronounce.wav"  # ここを修正
                     with open(file_name2, "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
