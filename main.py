@@ -44,7 +44,7 @@ def main():
         
                     # メッセージを表示
                     if color_pattern == 1:
-                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: green; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: LimeGreen; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
                     elif color_pattern == 2:
                         st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: Crimson; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
                     elif color_pattern == 3:
