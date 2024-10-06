@@ -22,7 +22,7 @@ def generate_audio(word2):
         response = client.audio.speech.create(
             model="tts-1",
             voice="alloy",  # 他の音声も選択可能
-            input=word2
+            input=word2  # ここを word2 に修正
         )
 
         # audioフォルダが存在しない場合は作成する
@@ -30,7 +30,7 @@ def generate_audio(word2):
             os.makedirs("audio")
 
         # 音声ファイルを保存
-        with open(f"audio/{word2}.wav", "wb") as f:
+        with open(f"audio/{word2}.wav", "wb") as f:  # ここを word2 に修正
             f.write(response.content)
 
     except Exception as e:
