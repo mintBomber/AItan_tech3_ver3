@@ -60,10 +60,11 @@ def main():
         if mode == '和英もーど':
             result = main_JE(word, category, df)     
         else:
-            result = main_EJ(word, category, df) 
+            result = main_EJ(word, category, df)
+            
+        print(result)
         # OpenAI APIを利用して音声を生成
         generate_audio(result['word'])
-        print(result)
 
         if "error" in result:
             st.error(result["error"])
@@ -78,7 +79,7 @@ def main():
                     with open(f"audio/{word}.wav", "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    # st.warning(f"音声ファイルが見つかりませんでした: audio/{word}.wav")
+                    st.warning(f"音声ファイルが見つかりませんでした: audio/{word}.wav")
             # 音声ファイルを再生
             
             st.info(f"Example Sentence:　{result['example_sentence']}")
