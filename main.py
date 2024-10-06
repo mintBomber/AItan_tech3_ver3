@@ -40,7 +40,7 @@ def main():
                     message = f"ログイン{continue_days}日目だね、すごいよ{user_name}！"
     
                 # メッセージを表示
-                st.markdown(f"<p style='text-align: center; font-size: 3em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{message}</p>", unsafe_allow_html=True)
+                st.markdown(f"<p style='text-align: center; font-size: 3em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
                 
         # ページを読み込んだ瞬間にword_db.csvを更新
         update_word_db("database/word_db.csv")
