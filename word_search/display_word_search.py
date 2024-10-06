@@ -74,11 +74,11 @@ def main():
             st.info(f"Meaning:　{result['meaning']}")
             st.info(f"Pronounce:　{result['pronounce']}")
             # 発音記号と再生ボタンを横に並べる
-            # col1, col2 = st.columns([3, 1])  # カラムの比率を調整
-            # with col1:
+            col1, col2 = st.columns([3, 1])  # カラムの比率を調整
+            with col1:
             #     # with open(f"audio/{word}.wav", "rb") as f:
             #     #     st.audio(f.read(), format="audio/wav")
-            # with col2:
+            with col2:
             #     # st.info()
             # 音声ファイルを再生
             
