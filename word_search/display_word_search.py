@@ -21,12 +21,12 @@ def main():
 
     if search_button and word:
         if mode == '和英もーど':
-            result = main_JE(word, category, df)  
+            result = main_JE(word, category, df)      
         else:
-            result = main_EJ(word, category, df)
-            # audio.pyを呼び出して音声を生成
-            audio_main(word)  # ここでaudio.pyのmain関数を呼び出す
+            result = main_EJ(word, category, df) 
         
+        # audio.pyを呼び出して音声を生成
+        # audio_main(word)  # ここでaudio.pyのmain関数を呼び出す
         print(result)
 
         if "error" in result:
@@ -35,15 +35,13 @@ def main():
             st.info(f"Word:　{result['word']}")
             st.info(f"Meaning:　{result['meaning']}")
             st.info(f"Pronounce:　{result['pronounce']}")
-            
-            if mode == '英和もーど':
-            # 発音記号と再生ボタンを横に並べる
-            col1, col2 = st.columns([3, 1])  # カラムの比率を調整
-            with col1:
-               with open(f"audio/{word}.wav", "rb") as f:
-               st.audio(f.read(), format="audio/wav")
-            with col2:
-               st.info()
+             # 発音記号と再生ボタンを横に並べる
+            # col1, col2 = st.columns([3, 1])  # カラムの比率を調整
+            # with col1:
+               # with open(f"audio/{word}.wav", "rb") as f:
+                   # st.audio(f.read(), format="audio/wav")
+           # with col2:
+                # st.info()
             st.info(f"Example Sentence:　{result['example_sentence']}")
             st.info(f"Translated Sentence:　{result['translated_sentence']}")
             st.info(f"Search Count:　{result['search_count']}")
