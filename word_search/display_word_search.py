@@ -16,7 +16,7 @@ def generate_audio(word2):
     OpenAI APIを利用して単語の音声を生成し、audioフォルダに保存する関数
 
     Args:
-        word (str): 単語
+        word2 (str): 単語
     """
     try:
         response = client.audio.speech.create(
@@ -64,6 +64,7 @@ def main():
             
         print(result)
         # OpenAI APIを利用して音声を生成
+        # ここで result['word'] を使うように修正
         generate_audio(result['word'])
 
         if "error" in result:
@@ -76,11 +77,13 @@ def main():
             # 発音記号と再生ボタンを横に並べる
             if mode == '英和もーど' :
                 try:
-                    with open(f"audio/{word}.wav", "rb") as f:
+                    # ここで result['word'] を使うように修正
+                    with open(f"audio/{result['word']}.wav", "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    st.warning(f"音声ファイルが見つかりませんでした: audio/{word}.wav")
-            # 音声ファイルを再生
+                    st.warning(f"音声ファイルが見つかりませんでした: audio/{result['word']}.wav")
+                except Exception as e:
+                    st.error(f"音声の再生に失敗しました: {e}")
             
             st.info(f"Example Sentence:　{result['example_sentence']}")
             st.info(f"Translated Sentence:　{result['translated_sentence']}")
