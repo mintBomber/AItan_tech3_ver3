@@ -81,13 +81,14 @@ def main():
             
             # 発音記号と再生ボタンを横に並べる
             if mode == '英和もーど' :
+                name = {result['word']}
                 try:
                     # 音声ファイル名を "{result['word']}_pronounce.wav" に変更
-                    file_name = f"audio/{result['word']}_pronounce.wav"
-                    with open(file_name, "rb") as f:
+                    file_name2 = f"audio/{name}_pronounce.wav"
+                    with open(file_name2, "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    # st.warning(f"音声ファイルが見つかりませんでした: {file_name}")  # ファイル名を使用
+                    # st.warning(f"音声ファイルが見つかりませんでした: {file_name2}")  # ファイル名を使用
                     st.warning(f"You should check your spelling.")
                 except Exception as e:
                     st.error(f"音声の再生に失敗しました: {e}")
