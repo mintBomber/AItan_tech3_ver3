@@ -30,6 +30,7 @@ def main():
                 if not df.empty:
                     continue_days = df.at[0, 'ContinueDays']
                     user_name = df.at[0, 'UserName']
+                    color_pattern = df.at[0, 'ColorPattern']
         
                     # メッセージを生成
                     if continue_days < 4:
@@ -42,8 +43,20 @@ def main():
                         message = f"ログイン{continue_days}日目だね、すごいよ{user_name}！"
         
                     # メッセージを表示
-                    st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                    if color_pattern = 1:
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: green; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                    elif color_pattern = 2:
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: Crimson; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                    elif color_pattern = 3:
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: navy; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                    elif color_pattern = 4:
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: IndianRed; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
+                    else:
+                        st.markdown(f"<p style='text-align: center; font-size: 2em; font-weight: bold; color: Olive; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);'>{message}</p>", unsafe_allow_html=True)
                 
+        
+        
+        
         # ページを読み込んだ瞬間にword_db.csvを更新
         update_word_db("database/word_db.csv")
         update_word_db("database/paper_db.csv")
