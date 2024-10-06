@@ -60,7 +60,7 @@ def main():
         ## audio.pyを呼び出して音声を生成
         ## audio_main(word)  # ここでaudio.pyのmain関数を呼び出す
         # OpenAI APIを利用して音声を生成
-        generate_audio(result['word'])
+        # generate_audio(result['word'])
         
         print(result)
 
