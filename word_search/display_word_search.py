@@ -80,6 +80,14 @@ def main():
             #     #     st.audio(f.read(), format="audio/wav")
             # with col2:
             #     # st.info()
+            # 音声ファイルを再生
+                    try:
+                        with open(f"audio/{result['word']}.wav", "rb") as f:
+                            st.audio(f.read(), format="audio/wav")
+                    except FileNotFoundError:
+                        # st.warning("音声ファイルが見つかりませんでした。")
+                    except Exception as e:
+                        # st.error(f"音声の再生に失敗しました: {e}")
             st.info(f"Example Sentence:　{result['example_sentence']}")
             st.info(f"Translated Sentence:　{result['translated_sentence']}")
             st.info(f"Search Count:　{result['search_count']}")
