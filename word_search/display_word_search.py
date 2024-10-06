@@ -29,12 +29,13 @@ def generate_audio(word2):
         if not os.path.exists("audio"):
             os.makedirs("audio")
 
-        # 音声ファイルを保存
-        with open(f"audio/{word2}.wav", "wb") as f:
+        # 音声ファイル名を "{word2}_pronounce.wav" に変更
+        file_name = f"audio/{word2}_pronounce.wav"
+        with open(file_name, "wb") as f:
             f.write(response.content)
-    
+
         # ファイルが生成されるまで待機
-        while not os.path.exists(f"audio/{word2}.wav"):
+        while not os.path.exists(file_name):  # ファイル名を使用
             time.sleep(0.1)
 
     except Exception as e:
@@ -81,13 +82,14 @@ def main():
             # 発音記号と再生ボタンを横に並べる
             if mode == '英和もーど' :
                 try:
-                    # ここで result['word'] を使うように修正
-                    with open(f"audio/{result['word']}.wav", "rb") as f:
+                    # 音声ファイル名を "{result['word']}_pronounce.wav" に変更
+                    file_name = f"audio/{result['word']}_pronounce.wav"
+                    with open(file_name, "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    # st.warning(f"音声ファイルが見つかりませんでした: audio/{result['word']}.wav")
+                    st.warning(f"音声ファイルが見つかりませんでした: {file_name}")  # ファイル名を使用
                 except Exception as e:
-                    # st.error(f"音声の再生に失敗しました: {e}")
+                    st.error(f"音声の再生に失敗しました: {e}")
             
             st.info(f"Example Sentence:　{result['example_sentence']}")
             st.info(f"Translated Sentence:　{result['translated_sentence']}")
