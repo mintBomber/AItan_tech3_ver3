@@ -64,6 +64,7 @@ def generate_character_comments(settings):
         st.write(f"{key}:")
         for comment in character_comments[key]:
             st.write(comment)
+#以上はプロト版
 
 st.title("設定")
 
@@ -182,7 +183,7 @@ if st.button("キャラクター設定を更新する", key="update_character"):
     df = pd.DataFrame([settings])
     df.to_csv(setting_csv_path, index=False)  # パスを変更
     # キャラクターの台詞を生成
-    generate_character_comments(settings)
+    # generate_character_comments(settings)
     st.success("キャラクター設定を更新しました！", icon="✅")
 
 # ユーザー情報の設定
@@ -210,7 +211,7 @@ if st.button("ユーザー情報を更新する", key="update_user_info"):
     df = pd.DataFrame([settings])
     df.to_csv(setting_csv_path, index=False)  # パスを変更
     # キャラクターの台詞を生成
-    generate_character_comments(settings)
+    # generate_character_comments(settings)
     st.success("ユーザー情報を更新しました！", icon="✅")
 
 # テーマカラーの設定
