@@ -61,7 +61,8 @@ def main():
             result = main_JE(word, category, df)     
         else:
             result = main_EJ(word, category, df) 
-        
+        # OpenAI APIを利用して音声を生成
+        generate_audio(result['word'])
         print(result)
 
         if "error" in result:
@@ -70,8 +71,7 @@ def main():
             st.info(f"Word:　{result['word']}")
             st.info(f"Meaning:　{result['meaning']}")
             st.info(f"Pronounce:　{result['pronounce']}")
-            # OpenAI APIを利用して音声を生成
-            generate_audio(result['word'])
+            
             # 発音記号と再生ボタンを横に並べる
             if mode == '英和もーど' :
                 try:
