@@ -12,7 +12,7 @@ def main():
     )
 
     if 'next_screen' not in st.session_state:
-        st.markdown("<h1 style='text-align: center; color: black;'>AI単</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center; color: black;'>&emsp;AI単</h1>", unsafe_allow_html=True)
         # ホーム画面表示
         col1, col2, col3= st.columns([1,1,1]) # 中央寄せのためにカラムを追加
         with col2: # 中央のカラムにタイトルを表示
