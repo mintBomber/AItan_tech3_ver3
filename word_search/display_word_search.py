@@ -87,7 +87,8 @@ def main():
                     with open(file_name, "rb") as f:
                         st.audio(f.read(), format="audio/wav")
                 except FileNotFoundError:
-                    st.warning(f"音声ファイルが見つかりませんでした: {file_name}")  # ファイル名を使用
+                    # st.warning(f"音声ファイルが見つかりませんでした: {file_name}")  # ファイル名を使用
+                    st.warning(f"You should check your spelling.")
                 except Exception as e:
                     st.error(f"音声の再生に失敗しました: {e}")
             
