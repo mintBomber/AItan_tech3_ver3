@@ -11,7 +11,7 @@ from utils import load_csv, load_api_key
 api_key = load_api_key()
 client = OpenAI(api_key=api_key)
 
-def generate_audio(word):
+def generate_audio(word2):
     """
     OpenAI APIを利用して単語の音声を生成し、audioフォルダに保存する関数
 
@@ -22,7 +22,7 @@ def generate_audio(word):
         response = client.audio.speech.create(
             model="tts-1",
             voice="alloy",  # 他の音声も選択可能
-            input=word
+            input=word2
         )
 
         # audioフォルダが存在しない場合は作成する
@@ -30,7 +30,7 @@ def generate_audio(word):
             os.makedirs("audio")
 
         # 音声ファイルを保存
-        with open(f"audio/{word}.wav", "wb") as f:
+        with open(f"audio/{word2}.wav", "wb") as f:
             f.write(response.content)
 
     except Exception as e:
